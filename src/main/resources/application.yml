@@ -1,3 +1,6 @@
+server:
+  port: 8080
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/wallet_db
@@ -24,5 +27,13 @@ spring:
       port: 6379
       timeout: 2000ms              # fail fast — don't let Redis latency block transactions
 
-server:
-  port: 8080
+
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      wallet-db:
+        sliding-window-size: 10
+        failure-rate-threshold: 50      # open after 5/10 calls fail
+        wait-duration-in-open-state: 10s
+        permitted-number-of-calls-in-half-open-state: 3

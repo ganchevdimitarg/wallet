@@ -1,0 +1,204 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< com.amusnet:wallet-service >---------------------
+[INFO] Building wallet-service 1.0.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ wallet-service ---
+[INFO] Deleting D:\IdeaProjects\wallet\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ wallet-service ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ wallet-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 18 source files with javac [debug parameters release 25] to target\classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/controller/WalletController.java:[27,20] cannot find symbol
+  symbol:   method getPlayerId()
+  location: variable request of type com.ganchevdimitarg.wallet.dto.WithdrawalRequest
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/controller/WalletController.java:[28,20] cannot find symbol
+  symbol:   method getAmount()
+  location: variable request of type com.ganchevdimitarg.wallet.dto.WithdrawalRequest
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/controller/WalletController.java:[40,20] cannot find symbol
+  symbol:   method getPlayerId()
+  location: variable request of type com.ganchevdimitarg.wallet.dto.WithdrawalRequest
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/controller/WalletController.java:[41,20] cannot find symbol
+  symbol:   method getAmount()
+  location: variable request of type com.ganchevdimitarg.wallet.dto.WithdrawalRequest
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[50,73] cannot find symbol
+  symbol:   method getBalance()
+  location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[50,57] cannot find symbol
+  symbol:   method getId()
+  location: class com.ganchevdimitarg.wallet.model.Transaction
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[57,19] cannot find symbol
+  symbol:   method getBalance()
+  location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[58,56] cannot find symbol
+  symbol:   method getBalance()
+  location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[61,33] cannot find symbol
+  symbol:   method getBalance()
+  location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[64,37] cannot find symbol
+  symbol:   method builder()
+  location: class com.ganchevdimitarg.wallet.model.Transaction
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[65,33] cannot find symbol
+  symbol:   method getId()
+  location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[75,57] cannot find symbol
+  symbol:   method getBalance()
+  location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[75,41] cannot find symbol
+  symbol:   method getId()
+  location: variable tx of type com.ganchevdimitarg.wallet.model.Transaction
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[82,9] cannot find symbol
+  symbol:   variable log
+  location: class com.ganchevdimitarg.wallet.service.WalletService
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[99,73] cannot find symbol
+  symbol:   method getBalance()
+  location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[99,57] cannot find symbol
+  symbol:   method getId()
+  location: class com.ganchevdimitarg.wallet.model.Transaction
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[105,33] cannot find symbol
+  symbol:   method getBalance()
+  location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[108,37] cannot find symbol
+  symbol:   method builder()
+  location: class com.ganchevdimitarg.wallet.model.Transaction
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[109,33] cannot find symbol
+  symbol:   method getId()
+  location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[118,57] cannot find symbol
+  symbol:   method getBalance()
+  location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[118,41] cannot find symbol
+  symbol:   method getId()
+  location: variable tx of type com.ganchevdimitarg.wallet.model.Transaction
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[125,9] cannot find symbol
+  symbol:   variable log
+  location: class com.ganchevdimitarg.wallet.service.WalletService
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[137,13] cannot find symbol
+  symbol:   variable log
+  location: class com.ganchevdimitarg.wallet.service.WalletService
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[143,17] cannot find symbol
+  symbol:   method getBalance()
+  location: class com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[151,9] cannot find symbol
+  symbol:   variable log
+  location: class com.ganchevdimitarg.wallet.service.WalletService
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[161,9] cannot find symbol
+  symbol:   variable log
+  location: class com.ganchevdimitarg.wallet.service.WalletService
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/filter/IdempotencyFilter.java:[59,13] cannot find symbol
+  symbol:   variable log
+  location: class com.ganchevdimitarg.wallet.filter.IdempotencyFilter
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/filter/IdempotencyFilter.java:[79,13] cannot find symbol
+  symbol:   variable log
+  location: class com.ganchevdimitarg.wallet.filter.IdempotencyFilter
+[INFO] 28 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.702 s
+[INFO] Finished at: 2026-06-10T01:05:27+03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.14.1:compile (default-compile) on project wallet-service: Compilation failure: Compilation failure: 
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/controller/WalletController.java:[27,20] cannot find symbol
+[ERROR]   symbol:   method getPlayerId()
+[ERROR]   location: variable request of type com.ganchevdimitarg.wallet.dto.WithdrawalRequest
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/controller/WalletController.java:[28,20] cannot find symbol
+[ERROR]   symbol:   method getAmount()
+[ERROR]   location: variable request of type com.ganchevdimitarg.wallet.dto.WithdrawalRequest
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/controller/WalletController.java:[40,20] cannot find symbol
+[ERROR]   symbol:   method getPlayerId()
+[ERROR]   location: variable request of type com.ganchevdimitarg.wallet.dto.WithdrawalRequest
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/controller/WalletController.java:[41,20] cannot find symbol
+[ERROR]   symbol:   method getAmount()
+[ERROR]   location: variable request of type com.ganchevdimitarg.wallet.dto.WithdrawalRequest
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[50,73] cannot find symbol
+[ERROR]   symbol:   method getBalance()
+[ERROR]   location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[50,57] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: class com.ganchevdimitarg.wallet.model.Transaction
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[57,19] cannot find symbol
+[ERROR]   symbol:   method getBalance()
+[ERROR]   location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[58,56] cannot find symbol
+[ERROR]   symbol:   method getBalance()
+[ERROR]   location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[61,33] cannot find symbol
+[ERROR]   symbol:   method getBalance()
+[ERROR]   location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[64,37] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.ganchevdimitarg.wallet.model.Transaction
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[65,33] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[75,57] cannot find symbol
+[ERROR]   symbol:   method getBalance()
+[ERROR]   location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[75,41] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable tx of type com.ganchevdimitarg.wallet.model.Transaction
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[82,9] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.ganchevdimitarg.wallet.service.WalletService
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[99,73] cannot find symbol
+[ERROR]   symbol:   method getBalance()
+[ERROR]   location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[99,57] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: class com.ganchevdimitarg.wallet.model.Transaction
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[105,33] cannot find symbol
+[ERROR]   symbol:   method getBalance()
+[ERROR]   location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[108,37] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.ganchevdimitarg.wallet.model.Transaction
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[109,33] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[118,57] cannot find symbol
+[ERROR]   symbol:   method getBalance()
+[ERROR]   location: variable wallet of type com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[118,41] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable tx of type com.ganchevdimitarg.wallet.model.Transaction
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[125,9] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.ganchevdimitarg.wallet.service.WalletService
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[137,13] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.ganchevdimitarg.wallet.service.WalletService
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[143,17] cannot find symbol
+[ERROR]   symbol:   method getBalance()
+[ERROR]   location: class com.ganchevdimitarg.wallet.model.Wallet
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[151,9] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.ganchevdimitarg.wallet.service.WalletService
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/service/WalletService.java:[161,9] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.ganchevdimitarg.wallet.service.WalletService
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/filter/IdempotencyFilter.java:[59,13] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.ganchevdimitarg.wallet.filter.IdempotencyFilter
+[ERROR] /D:/IdeaProjects/wallet/src/main/java/com/ganchevdimitarg/wallet/filter/IdempotencyFilter.java:[79,13] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.ganchevdimitarg.wallet.filter.IdempotencyFilter
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
