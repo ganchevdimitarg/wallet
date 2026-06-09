@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/wallet_db
+    username: wallet_user
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 20        # tune based on Postgres max_connections
+      minimum-idle: 5
+      connection-timeout: 3000
+
+  jpa:
+    hibernate:
+      ddl-auto: validate           # use Flyway/Liquibase for schema — never auto-create in prod
+    show-sql: false                # set to true locally for debugging
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          time_zone: UTC
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 2000ms              # fail fast — don't let Redis latency block transactions
+
+server:
+  port: 8080
