@@ -39,8 +39,10 @@ spring:
 
   flyway:
     enabled: true
-    # Flyway only runs against the primary datasource. The replica is
-    # read-only; in production it receives WAL streaming from the primary.
+    url: jdbc:postgresql://localhost:5432/wallet_db
+    user: wallet_user
+    password: ${DB_PASSWORD}
+
 
 resilience4j:
   circuitbreaker:

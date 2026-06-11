@@ -10,7 +10,7 @@
         <version>4.0.6</version>
     </parent>
 
-    <groupId>com.amusnet</groupId>
+    <groupId>com.ganchevdimitarg</groupId>
     <artifactId>wallet-service</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
@@ -18,6 +18,7 @@
         <java.version>25</java.version>
         <lombok.version>1.18.46</lombok.version>
         <spring-cloud.version>2025.1.1</spring-cloud.version>
+        <testcontainers.version>2.0.5</testcontainers.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -58,6 +59,10 @@
             <artifactId>flyway-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
@@ -67,6 +72,23 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-testcontainers</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers-postgresql</artifactId>
+            <version>${testcontainers.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers-junit-jupiter</artifactId>
+            <version>${testcontainers.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
