@@ -18,11 +18,13 @@ A Spring Boot REST API for managing player wallets — deposits, withdrawals, an
 |----------------|-------------------------------------|
 | Runtime        | Java 25                             |
 | Framework      | Spring Boot 4.0.6                   |
-| Database       | PostgreSQL (with pgcrypto)          |
-| Cache          | Redis                               |
-| Migrations     | Flyway                              |
+| Database       | PostgreSQL 17 (primary + read replica) |
+| Cache          | Redis 7                             |
+| Migrations     | Flyway 11                           |
+| Resilience     | Resilience4j Circuit Breaker        |
+| Infrastructure | Docker Compose                      |
 | Build          | Maven                               |
-| Testing        | JUnit 5, Mockito, AssertJ           |
+| Testing        | JUnit 5, Mockito, AssertJ, Testcontainers |
 
 ## Quick Start
 
