@@ -18,6 +18,9 @@ target/
 *.iws
 *.iml
 *.ipr
+docs
+.claude
+.code-review-graph
 
 ### NetBeans ###
 /nbproject/private/
@@ -31,3 +34,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Docker Compose environment file — committed with dev defaults, not real secrets
+# Uncomment the line below if real secrets are ever added to .env:
+# .env
