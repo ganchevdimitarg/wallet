@@ -283,6 +283,21 @@ src/
 ./mvnw test
 ```
 
+## Environment Variables
+
+| Variable | Default (dev) | Description |
+|----------|---------------|-------------|
+| `DB_PASSWORD` | `wallet_dev_password` | PostgreSQL password for `wallet_user` |
+
+The `.env` file is committed to the repository with dev-only values — safe for local development. Docker Compose reads it automatically. The Spring Boot app reads `DB_PASSWORD` from the environment, so you must export it before running:
+
+```bash
+export DB_PASSWORD=wallet_dev_password
+./mvnw spring-boot:run
+```
+
+In production, override with a real secret via your deployment platform's secret manager (never commit production passwords).
+
 ## Configuration
 
 Key settings in `application.yml`:
