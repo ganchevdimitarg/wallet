@@ -29,8 +29,7 @@ A Spring Boot REST API for managing player wallets — deposits, withdrawals, an
 ### Prerequisites
 
 - Java 25+
-- PostgreSQL 15+ (with `pgcrypto` extension available)
-- Redis 7+
+- Docker (for backing services)
 - Maven 3.9+ (or use the included `mvnw` wrapper)
 
 ### 1. Clone & Configure
@@ -40,27 +39,39 @@ git clone <repo-url>
 cd wallet
 ```
 
-Set your database password via an environment variable:
+The `.env` file is pre-configured with dev defaults:
 
 ```bash
-export DB_PASSWORD=your_password_here
+# .env (committed with dev-only values — safe for local use)
+DB_PASSWORD=wallet_dev_password
 ```
 
-Or edit `src/main/resources/application.yml` directly (not recommended for production).
+### 2. Start Backing Services
 
-### 2. Create the Database
-
-```sql
-CREATE DATABASE wallet_db;
-CREATE USER wallet_user WITH PASSWORD 'your_password_here';
-GRANT ALL PRIVILEGES ON DATABASE wallet_db TO wallet_user;
+```bash
+docker compose up -d
 ```
 
-Flyway will create the schema automatically on first startup.
+This starts three containers:
+
+| Container | Port | Purpose |
+|-----------|------|---------|
+| `wallet-db-primary` | 5432 | PostgreSQL — writes (withdraw, deposit) |
+| `wallet-db-replica` | 5433 | PostgreSQL — reads (balance queries) |
+| `wallet-redis` | 6379 | Redis — idempotency keys + balance cache |
+
+Wait for all three to show `(healthy)`:
+
+```bash
+docker compose ps
+```
+
+Flyway runs migrations automatically on app startup against the primary. The replica gets its own schema via a separate migration pass (in production this would be WAL streaming).
 
 ### 3. Build & Run
 
 ```bash
+export DB_PASSWORD=wallet_dev_password
 ./mvnw spring-boot:run
 ```
 
@@ -69,6 +80,9 @@ The server starts on **http://localhost:8080**.
 ### 4. Verify
 
 ```bash
+# Health check
+curl http://localhost:8080/actuator/health
+
 # Check balance (wallet is created on first deposit)
 curl http://localhost:8080/api/v1/wallet/<player-id>/balance
 
@@ -83,6 +97,12 @@ curl -X POST http://localhost:8080/api/v1/wallet/withdraw \
   -H "Content-Type: application/json" \
   -H "X-Idempotency-Key: $(uuidgen)" \
   -d '{"playerId": "<player-id>", "amount": 25.00}'
+```
+
+### 5. Stop
+
+```bash
+docker compose down
 ```
 
 ## API Reference
