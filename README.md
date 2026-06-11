@@ -26,6 +26,68 @@ A Spring Boot REST API for managing player wallets — deposits, withdrawals, an
 | Build          | Maven                               |
 | Testing        | JUnit 5, Mockito, AssertJ, Testcontainers |
 
+## Architecture
+
+### Read/Write Splitting
+
+The service uses a **primary/replica** datasource topology to separate transactional writes from analytical reads:
+
+```
+┌──────────────┐     ┌──────────────────┐     ┌──────────────┐
+│   POST       │     │                  │     │              │
+│  /withdraw   │────▶│  Primary (5432)  │────▶│  wallets     │
+│  /deposit    │     │  readWrite=true  │     │  transactions│
+└──────────────┘     └──────────────────┘     └──────────────┘
+
+┌──────────────┐     ┌──────────────────┐
+│   GET        │     │                  │
+│  /balance    │────▶│  Replica (5433)  │
+│              │     │  readOnly=true   │
+└──────────────┘     └──────────────────┘
+```
+
+How it works:
+- `DataSourceConfig` defines three beans: `primaryDataSource`, `replicaDataSource`, and a `routingDataSource` (marked `@Primary`).
+- The routing datasource inspects the current Spring transaction context: `@Transactional(readOnly = true)` → replica, otherwise → primary.
+- The replica uses HikariCP's `read-only: true` as a second guard — it will refuse write attempts at the connection pool level.
+
+```java
+// In WalletService:
+@Transactional                    // → routes to primary
+public WithdrawalResponse withdraw(...) { ... }
+
+@Transactional(readOnly = true)   // → routes to replica
+public BigDecimal getBalance(...) { ... }
+```
+
+### Circuit Breaker
+
+The service wraps all database calls with Resilience4j circuit breakers. If the database becomes unreachable, the circuit opens and returns a fallback rather than cascading failures:
+
+| Method | Fallback Behavior |
+|--------|-------------------|
+| `withdraw` / `deposit` | Throw `ServiceUnavailableException` (503) |
+| `getBalance` | Serve **stale cache** from Redis if available; otherwise 503 |
+
+Configuration (`application.yml`):
+
+```yaml
+resilience4j:
+  circuitbreaker:
+    instances:
+      wallet-db:
+        sliding-window-size: 10       # evaluate last 10 calls
+        failure-rate-threshold: 50    # open at 50% failure rate
+        wait-duration-in-open-state: 10s
+        permitted-number-of-calls-in-half-open-state: 3
+```
+
+The balance read's fallback is prioritized — it serves stale cache rather than failing, so players can still see their balance even during a DB outage.
+
+### Idempotency
+
+See the [Idempotency Design](#idempotency-design) section below for the dual-layer Redis + database approach.
+
 ## Quick Start
 
 ### Prerequisites
