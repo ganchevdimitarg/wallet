@@ -1,0 +1,73 @@
+services:
+  # ── PostgreSQL Primary (writes) ──────────────────────────────────────────────
+  wallet-db-primary:
+    image: postgres:17-alpine
+    container_name: wallet-db-primary
+    environment:
+      POSTGRES_DB: wallet_db
+      POSTGRES_USER: wallet_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-primary-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wallet_user -d wallet_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - wallet-net
+
+  # ── PostgreSQL Replica (reads) ───────────────────────────────────────────────
+  # In production this would be a streaming replica. For local dev we run a
+  # separate Postgres instance on a different port — Flyway migrations run on
+  # the primary only (app startup), so the replica needs its own schema.
+  # For a true read-replica setup in dev, consider running init scripts.
+  wallet-db-replica:
+    image: postgres:17-alpine
+    container_name: wallet-db-replica
+    environment:
+      POSTGRES_DB: wallet_db
+      POSTGRES_USER: wallet_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - pg-replica-data:/var/lib/postgresql/data
+      # Mirror primary schema: run Flyway migrations against primary at app
+      # startup, then this replica serves stale reads. For true dev replication
+      # you'd config streaming — this simpler setup works for the read-only
+      # routing in DataSourceConfig.
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wallet_user -d wallet_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - wallet-net
+
+  # ── Redis (idempotency store + balance cache) ────────────────────────────────
+  wallet-redis:
+    image: redis:7-alpine
+    container_name: wallet-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - wallet-net
+
+volumes:
+  pg-primary-data:
+  pg-replica-data:
+  redis-data:
+
+networks:
+  wallet-net:
+    driver: bridge
