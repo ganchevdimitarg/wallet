@@ -283,6 +283,23 @@ src/
 ./mvnw test
 ```
 
+### Test Architecture
+
+- **Unit tests** (`WalletServiceTest`, `WalletControllerTest`, `GlobalExceptionHandlerTest`) — use Mockito for mocking Spring beans. No database or Redis required.
+- **Integration tests** (`IdempotencyStoreTest`) — use **Testcontainers** to spin up real PostgreSQL and Redis instances. These are the tests that verify idempotency against real infrastructure.
+
+Testcontainers config is in `src/test/resources/application.yml` — it uses random ports and lets Testcontainers manage the lifecycle.
+
+### Running with Docker services
+
+For manual verification against the full stack:
+
+```bash
+docker compose up -d
+export DB_PASSWORD=wallet_dev_password
+./mvnw spring-boot:run
+```
+
 ## Environment Variables
 
 | Variable | Default (dev) | Description |
