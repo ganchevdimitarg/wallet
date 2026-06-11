@@ -66,7 +66,9 @@ Wait for all three to show `(healthy)`:
 docker compose ps
 ```
 
-Flyway runs migrations automatically on app startup against the primary. The replica gets its own schema via a separate migration pass (in production this would be WAL streaming).
+Look for `(healthy)` in the STATUS column.
+
+Flyway runs migrations automatically on app startup against the primary. The replica gets its own schema via a separate migration run (in production this would be WAL streaming).
 
 ### 3. Build & Run
 
@@ -75,12 +77,14 @@ export DB_PASSWORD=wallet_dev_password
 ./mvnw spring-boot:run
 ```
 
+Docker Compose reads `.env` automatically; for `spring-boot:run` you need the variable in your shell environment.
+
 The server starts on **http://localhost:8080**.
 
 ### 4. Verify
 
 ```bash
-# Health check
+# Health check (Spring Boot Actuator endpoint)
 curl http://localhost:8080/actuator/health
 
 # Check balance (wallet is created on first deposit)
@@ -98,6 +102,8 @@ curl -X POST http://localhost:8080/api/v1/wallet/withdraw \
   -H "X-Idempotency-Key: $(uuidgen)" \
   -d '{"playerId": "<player-id>", "amount": 25.00}'
 ```
+
+(If `uuidgen` is unavailable, substitute any unique string for the idempotency key.)
 
 ### 5. Stop
 
