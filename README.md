@@ -244,19 +244,37 @@ Keys expire from Redis after 24 hours but persist in the database indefinitely.
 src/
 ├── main/
 │   ├── java/com/ganchevdimitarg/wallet/
-│   │   ├── config/          # Redis configuration
-│   │   ├── controller/      # REST controllers
-│   │   ├── dto/             # Request/Response DTOs
-│   │   ├── exception/       # Custom exceptions + global handler
-│   │   ├── filter/          # Idempotency filter + Redis store
-│   │   ├── model/           # JPA entities + enums
-│   │   ├── repository/      # Spring Data JPA repositories
-│   │   └── service/         # Business logic
+│   │   ├── config/
+│   │   │   ├── DataSourceConfig.java    # Primary/replica routing datasource
+│   │   │   ├── FlywayConfig.java        # Explicit Flyway migration runner
+│   │   │   ├── JacksonConfig.java       # ObjectMapper bean
+│   │   │   └── RedisConfig.java         # StringRedisTemplate bean
+│   │   ├── controller/
+│   │   │   └── WalletController.java    # REST endpoints
+│   │   ├── dto/                         # Request/Response DTOs
+│   │   ├── exception/
+│   │   │   ├── GlobalExceptionHandler.java
+│   │   │   ├── InsufficientFundsException.java
+│   │   │   ├── ServiceUnavailableException.java
+│   │   │   └── WalletNotFoundException.java
+│   │   ├── filter/
+│   │   │   ├── IdempotencyFilter.java   # Intercepts POST requests
+│   │   │   └── IdempotencyStore.java    # Redis-backed idempotency checks
+│   │   ├── model/
+│   │   │   ├── Transaction.java         # JPA entity
+│   │   │   ├── TransactionType.java     # Enum: DEPOSIT, WITHDRAWAL
+│   │   │   └── Wallet.java              # JPA entity with @Version
+│   │   ├── repository/
+│   │   │   ├── TransactionRepository.java
+│   │   │   └── WalletRepository.java
+│   │   ├── service/
+│   │   │   └── WalletService.java       # Business logic + circuit breaker
+│   │   └── WalletApplication.java       # Spring Boot entry point
 │   └── resources/
-│       ├── application.yml  # Application configuration
-│       └── db/migration/    # Flyway SQL migrations
+│       ├── application.yml              # Application configuration
+│       └── db/migration/                # Flyway SQL migrations
 └── test/
-    └── java/.../wallet/     # Unit tests
+    └── java/.../wallet/                 # Unit tests
 ```
 
 ## Testing
