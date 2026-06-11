@@ -28,6 +28,8 @@ A Spring Boot REST API for managing player wallets — deposits, withdrawals, an
 
 ## Architecture
 
+The system follows a layered pattern: REST controllers delegate to a service layer that coordinates persistence through routing datasources and resilient circuit breakers.
+
 ### Read/Write Splitting
 
 The service uses a **primary/replica** datasource topology to separate transactional writes from analytical reads:
@@ -35,13 +37,13 @@ The service uses a **primary/replica** datasource topology to separate transacti
 ```
 ┌──────────────┐     ┌──────────────────┐     ┌──────────────┐
 │   POST       │     │                  │     │              │
-│  /withdraw   │────▶│  Primary (5432)  │────▶│  wallets     │
+│  /withdraw   │────>│  Primary (5432)  │────>│  wallets     │
 │  /deposit    │     │  readWrite=true  │     │  transactions│
 └──────────────┘     └──────────────────┘     └──────────────┘
 
 ┌──────────────┐     ┌──────────────────┐
 │   GET        │     │                  │
-│  /balance    │────▶│  Replica (5433)  │
+│  /balance    │────>│  Replica (5433)  │
 │              │     │  readOnly=true   │
 └──────────────┘     └──────────────────┘
 ```
