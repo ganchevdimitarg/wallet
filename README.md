@@ -269,11 +269,44 @@ src/
 
 Key settings in `application.yml`:
 
-| Property                          | Default                | Description                              |
-|-----------------------------------|------------------------|------------------------------------------|
-| `spring.datasource.url`           | `jdbc:postgresql:...`  | PostgreSQL connection string             |
-| `spring.datasource.password`      | `${DB_PASSWORD}`       | Resolved from environment variable       |
-| `spring.data.redis.host`          | `localhost`            | Redis host                               |
-| `spring.data.redis.port`          | `6379`                 | Redis port                               |
-| `server.port`                     | `8080`                 | HTTP listen port                         |
-| `spring.datasource.hikari.maximum-pool-size` | `20`       | HikariCP connection pool size            |
+### Datasource
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `spring.datasource.primary.jdbc-url` | `jdbc:postgresql://localhost:5432/wallet_db` | Primary (write) database |
+| `spring.datasource.replica.jdbc-url` | `jdbc:postgresql://localhost:5433/wallet_db` | Replica (read) database |
+| `spring.datasource.primary.username` | `wallet_user` | Database user |
+| `spring.datasource.primary.password` | `${DB_PASSWORD}` | Resolved from environment variable |
+| `spring.datasource.primary.hikari.maximum-pool-size` | `20` | Connection pool for writes |
+| `spring.datasource.replica.hikari.maximum-pool-size` | `10` | Connection pool for reads |
+| `spring.datasource.replica.hikari.read-only` | `true` | Hikari-level guard against writes |
+
+### Redis
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `spring.data.redis.host` | `localhost` | Redis host |
+| `spring.data.redis.port` | `6379` | Redis port |
+| `spring.data.redis.timeout` | `2000ms` | Fail fast — don't let Redis block transactions |
+
+### Flyway
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `spring.flyway.enabled` | `true` | Run migrations on startup |
+| `spring.flyway.url` | `jdbc:postgresql://localhost:5432/wallet_db` | Migrations only run against primary |
+
+### Resilience4j
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `resilience4j.circuitbreaker.instances.wallet-db.sliding-window-size` | `10` | Calls evaluated for failure rate |
+| `resilience4j.circuitbreaker.instances.wallet-db.failure-rate-threshold` | `50` | Percent failures before opening circuit |
+| `resilience4j.circuitbreaker.instances.wallet-db.wait-duration-in-open-state` | `10s` | Time before attempting half-open |
+| `resilience4j.circuitbreaker.instances.wallet-db.permitted-number-of-calls-in-half-open-state` | `3` | Test calls before closing circuit |
+
+### Server
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `server.port` | `8080` | HTTP listen port |
