@@ -251,7 +251,10 @@ src/
 │   │   │   └── RedisConfig.java         # StringRedisTemplate bean
 │   │   ├── controller/
 │   │   │   └── WalletController.java    # REST endpoints
-│   │   ├── dto/                         # Request/Response DTOs
+│   │   ├── dto/
+│   │   │   ├── DepositRequest.java
+│   │   │   ├── WithdrawalRequest.java
+│   │   │   └── WithdrawalResponse.java
 │   │   ├── exception/
 │   │   │   ├── GlobalExceptionHandler.java
 │   │   │   ├── InsufficientFundsException.java
@@ -272,9 +275,17 @@ src/
 │   │   └── WalletApplication.java       # Spring Boot entry point
 │   └── resources/
 │       ├── application.yml              # Application configuration
-│       └── db/migration/                # Flyway SQL migrations
+│       └── db/migration/
+│           └── V1__create_wallet_schema.sql
 └── test/
-    └── java/.../wallet/                 # Unit tests
+    └── java/com/ganchevdimitarg/wallet/
+        ├── controller/
+        │   └── WalletControllerTest.java
+        ├── exception/
+        │   └── GlobalExceptionHandlerTest.java
+        ├── filter/
+        │   └── IdempotencyStoreTest.java
+        └── WalletServiceTest.java
 ```
 
 ## Testing
@@ -290,7 +301,7 @@ src/
 
 Testcontainers config is in `src/test/resources/application.yml` — it uses random ports and lets Testcontainers manage the lifecycle.
 
-### Running with Docker services
+### Manual Verification
 
 For manual verification against the full stack:
 
