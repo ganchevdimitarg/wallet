@@ -12,12 +12,27 @@ spring:
         jdbc:
           time_zone: UTC
 
+  datasource:
+    primary:
+      jdbc-url: jdbc:postgresql://localhost:5432/placeholder
+      username: placeholder
+      password: placeholder
+    replica:
+      jdbc-url: jdbc:postgresql://localhost:5433/placeholder
+      username: placeholder
+      password: placeholder
+      hikari:
+        read-only: true
+
   data:
     redis:
       timeout: 2000ms
 
   flyway:
     enabled: true                 # Testcontainers gives real PostgreSQL — Flyway works
+    url: jdbc:postgresql://localhost:5432/placeholder
+    user: placeholder
+    password: placeholder
     postgresql:
       transactional: false       # CONCURRENTLY indexes require non-transactional migration
 
