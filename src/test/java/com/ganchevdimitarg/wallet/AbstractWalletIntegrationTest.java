@@ -1,5 +1,8 @@
 package com.ganchevdimitarg.wallet;
 
+import com.ganchevdimitarg.wallet.model.Wallet;
+import com.ganchevdimitarg.wallet.repository.WalletRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -7,6 +10,9 @@ import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import java.math.BigDecimal;
+import java.util.UUID;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Testcontainers
@@ -19,6 +25,9 @@ public abstract class AbstractWalletIntegrationTest {
     @Container
     static final GenericContainer<?> redis =
             new GenericContainer<>("redis:7").withExposedPorts(6379);
+
+    @Autowired
+    protected WalletRepository walletRepository;
 
     @DynamicPropertySource
     static void configureProperties(DynamicPropertyRegistry registry) {
@@ -40,5 +49,23 @@ public abstract class AbstractWalletIntegrationTest {
         // Redis
         registry.add("spring.data.redis.host", redis::getHost);
         registry.add("spring.data.redis.port", () -> redis.getMappedPort(6379));
+    }
+
+    protected Wallet createWalletWithBalance(BigDecimal balance) {
+        Wallet wallet = Wallet.builder()
+                .playerId(UUID.randomUUID())
+                .balance(balance)
+                .version(0L)
+                .build();
+        return walletRepository.save(wallet);
+    }
+
+    protected Wallet createWalletWithBalance(UUID playerId, BigDecimal balance) {
+        Wallet wallet = Wallet.builder()
+                .playerId(playerId)
+                .balance(balance)
+                .version(0L)
+                .build();
+        return walletRepository.save(wallet);
     }
 }
