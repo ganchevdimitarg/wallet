@@ -18,6 +18,8 @@ spring:
 
   flyway:
     enabled: true                 # Testcontainers gives real PostgreSQL — Flyway works
+    postgresql:
+      transactional: false       # CONCURRENTLY indexes require non-transactional migration
 
 resilience4j:
   circuitbreaker:
