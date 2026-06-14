@@ -79,6 +79,8 @@ public class WalletService {
                                                BigDecimal amount,
                                                String idempotencyKey,
                                                Exception ex) {
+        if (ex instanceof WalletNotFoundException) throw (WalletNotFoundException) ex;
+        if (ex instanceof InsufficientFundsException) throw (InsufficientFundsException) ex;
         log.error("Circuit open for withdraw — playerId={} reason={}", playerId, ex.getMessage());
         throw new ServiceUnavailableException("Withdrawal service temporarily unavailable");
     }
@@ -122,6 +124,8 @@ public class WalletService {
                                               BigDecimal amount,
                                               String idempotencyKey,
                                               Exception ex) {
+        if (ex instanceof WalletNotFoundException) throw (WalletNotFoundException) ex;
+        if (ex instanceof InsufficientFundsException) throw (InsufficientFundsException) ex;
         log.error("Circuit open for deposit — playerId={} reason={}", playerId, ex.getMessage());
         throw new ServiceUnavailableException("Deposit service temporarily unavailable");
     }
@@ -148,6 +152,7 @@ public class WalletService {
 
     // Fallback: serve stale cache when DB is down rather than returning 503
     public BigDecimal getBalanceFallback(UUID playerId, Exception ex) {
+        if (ex instanceof WalletNotFoundException) throw (WalletNotFoundException) ex;
         log.warn("Circuit open for getBalance — serving stale cache for playerId={}", playerId);
         String cached = redis.opsForValue().get(BALANCE_KEY + playerId);
         if (cached != null) return new BigDecimal(cached);

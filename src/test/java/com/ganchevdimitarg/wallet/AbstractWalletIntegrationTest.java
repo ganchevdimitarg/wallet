@@ -8,7 +8,6 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.math.BigDecimal;
@@ -18,13 +17,19 @@ import java.util.UUID;
 @Testcontainers
 public abstract class AbstractWalletIntegrationTest {
 
-    @Container
+    // Singleton containers — started once per JVM, shared across all test classes.
+    // The manual static-block pattern is used instead of @Container so the containers
+    // survive across multiple @SpringBootTest classes. Ryuk stops them at JVM exit.
     static final PostgreSQLContainer<?> postgres =
             new PostgreSQLContainer<>("postgres:16");
 
-    @Container
     static final GenericContainer<?> redis =
             new GenericContainer<>("redis:7").withExposedPorts(6379);
+
+    static {
+        postgres.start();
+        redis.start();
+    }
 
     @Autowired
     protected WalletRepository walletRepository;
