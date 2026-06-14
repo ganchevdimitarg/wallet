@@ -45,3 +45,6 @@ resilience4j:
         wait-duration-in-open-state: 10s
         permitted-number-of-calls-in-half-open-state: 3
         register-health-indicator: false
+        ignore-exceptions:
+          - com.ganchevdimitarg.wallet.exception.WalletNotFoundException
+          - com.ganchevdimitarg.wallet.exception.InsufficientFundsException

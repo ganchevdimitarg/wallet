@@ -38,3 +38,7 @@ build/
 # Docker Compose environment file — committed with dev defaults, not real secrets
 # Uncomment the line below if real secrets are ever added to .env:
 # .env
+
+# Claude Code — local only
+.claude/audit.log
+.claude/settings.local.json
